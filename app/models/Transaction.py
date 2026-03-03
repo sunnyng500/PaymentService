@@ -14,8 +14,8 @@ class Transaction(Base):
     # 冪等性 Key：防止前端重複提交導致重複扣款
     request_id = Column(String(64), unique=True, index=True, nullable=False)
 
-    from_account_id = Column(BigInteger, ForeignKey("account.id"), nullable=False)
-    to_account_id = Column(BigInteger, ForeignKey("account.id"), nullable=False)
+    sender_id = Column(BigInteger, ForeignKey("account.id"), nullable=False)
+    receiver_id = Column(BigInteger, ForeignKey("account.id"), nullable=False)
     amount = Column(Numeric(20, 2), nullable=False)
 
     status = Column(Enum(TransactionStatus), default=TransactionStatus.PENDING)
